@@ -5,6 +5,7 @@ import java.io.IOException
 object GitDiffUtils {
 
     fun getDiffFiles(): List<String> {
+        println("start ========")
         val exec = Runtime.getRuntime().exec("git diff --name-only")
         val inputStream = exec.inputStream
         try {
@@ -19,7 +20,6 @@ object GitDiffUtils {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        println("========")
         println(getDiffFiles())
     }
 }

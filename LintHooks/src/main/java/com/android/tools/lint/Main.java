@@ -2260,6 +2260,7 @@ public class Main {
 
     public void insertDiffFiles(LintRequest lintRequest) {
         List<String> diffFiles = GitDiffUtils.INSTANCE.getDiffFiles();
+        System.out.println("diff file size: " + diffFiles.size());
         if (diffFiles.isEmpty()) {
             return;
         }
