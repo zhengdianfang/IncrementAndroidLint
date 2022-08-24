@@ -42,6 +42,8 @@ import org.xml.sax.SAXException;
 
 import java.io.*;
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
@@ -2260,15 +2262,17 @@ public class Main {
 
     public void insertDiffFiles(LintRequest lintRequest) {
         List<String> diffFiles = GitDiffUtils.INSTANCE.getDiffFiles();
-        System.out.println("diff file size: " + diffFiles.size());
         if (diffFiles.isEmpty()) {
             return;
         }
+        System.out.println("diff file size: " + diffFiles.size());
         Collection<Project> projects = lintRequest.getProjects();
+
         if (projects != null) {
             for (Project project : projects) {
                 for (String diffFile : diffFiles) {
-                    project.addFile(new File(diffFile));
+                    System.out.println("insert file : " + diffFile);
+                    project.addFile(new File(project.getDir().getParentFile(), diffFile));
                 }
             }
         }
